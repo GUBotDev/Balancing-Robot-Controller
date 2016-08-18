@@ -31,8 +31,6 @@ public class Controller {
                     break;
                 }
             }
-            
-            //Thread.sleep(1);
         }
     }
     

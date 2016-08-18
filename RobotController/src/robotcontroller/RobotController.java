@@ -13,7 +13,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -27,13 +26,12 @@ import javafx.stage.Stage;
 public class RobotController extends Application {
     static boolean up = false, down = false, left = false, right = false, send = false;
     ConnectionThread connThread;
+    String ip = "192.168.0.51";
+    int port = 6789;
     
     @Override
     public void start(Stage primaryStage) {
         GridPane gPane = new GridPane();
-        
-        TextField ip = new TextField();
-        TextField port = new TextField();
         
         Button btnU = new Button();
         Button btnD = new Button();
@@ -45,8 +43,6 @@ public class RobotController extends Application {
         btnD.setText("Down");
         btnL.setText("Left");
         btnR.setText("Right");
-        ip.setText("IP");
-        port.setText("Port");
         btnC.setText("Connect");
         
         btnU.setOnMousePressed((MouseEvent me) -> {
@@ -84,7 +80,7 @@ public class RobotController extends Application {
         btnC.setOnMousePressed((MouseEvent me) -> {
             try {
                 //connThread = new ConnectionThread(ip.getText(), Integer.parseInt(port.getText()));
-                connThread = new ConnectionThread("192.168.0.22", 6789);
+                connThread = new ConnectionThread(ip, port);
                 connThread.start();
             }
             catch (IOException ex) {
@@ -102,16 +98,12 @@ public class RobotController extends Application {
         GridPane.setConstraints(btnR, 2, 1);
         GridPane.setConstraints(btnL, 0, 1);
         GridPane.setConstraints(btnD, 1, 2);
-        GridPane.setConstraints(ip, 3, 0);
-        GridPane.setConstraints(port, 3, 1);
         GridPane.setConstraints(btnC, 0, 3);
         
         GridPane.setMargin(btnU, new Insets(10, 10, 10, 10));
         GridPane.setMargin(btnD, new Insets(10, 10, 10, 10));
         GridPane.setMargin(btnL, new Insets(10, 10, 10, 10));
         GridPane.setMargin(btnR, new Insets(10, 10, 10, 10));
-        GridPane.setMargin(ip, new Insets(10, 10, 10, 10));
-        GridPane.setMargin(port, new Insets(10, 10, 10, 10));
         GridPane.setMargin(btnC, new Insets(10, 10, 10, 10));
         
         //gPane.setPadding(new Insets(10, 10, 10, 10));
